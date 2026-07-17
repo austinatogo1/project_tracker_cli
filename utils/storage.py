@@ -7,7 +7,10 @@ main.py focused on CLI wiring instead of file-handling details.
 """
 
 import json
+import logging
 import os
+
+logger = logging.getLogger("project_tracker")
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
 
@@ -33,14 +36,19 @@ def load_json(path):
     so a fresh install or a corrupted file never crashes the CLI.
     """
     if not os.path.exists(path):
+        logger.debug("load_json(%s): file does not exist, returning []", path)
         return []
     try:
         with open(path, "r", encoding="utf-8") as f:
             content = f.read().strip()
             if not content:
+                logger.debug("load_json(%s): file is empty, returning []", path)
                 return []
-            return json.loads(content)
+            records = json.loads(content)
+            logger.debug("load_json(%s): loaded %d record(s)", path, len(records))
+            return records
     except (json.JSONDecodeError, OSError) as exc:
+        logger.warning("load_json(%s): could not read file (%s), returning []", path, exc)
         print(f"Warning: could not read {path} ({exc}). Starting with empty data.")
         return []
 
@@ -51,7 +59,9 @@ def save_json(path, records):
     try:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(records, f, indent=2)
+        logger.debug("save_json(%s): wrote %d record(s)", path, len(records))
     except OSError as exc:
+        logger.error("save_json(%s): could not save (%s)", path, exc)
         print(f"Error: could not save to {path} ({exc}).")
 
 
