@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Implement add-task",
+    "project_id": 1,
+    "assigned_to": [
+      "Alex"
+    ],
+    "status": "done"
+  },
+  {
+    "id": 2,
+    "title": "Write README",
+    "project_id": 1,
+    "assigned_to": [
+      "Alex",
+      "Sam"
+    ],
+    "status": "todo"
+  },
+  {
+    "id": 3,
+    "title": "Design homepage",
+    "project_id": 2,
+    "assigned_to": [
+      "Sam"
+    ],
+    "status": "todo"
+  }
+]

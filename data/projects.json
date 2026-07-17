@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "CLI Tool",
+    "description": "Build a project management CLI",
+    "due_date": "2026-08-01",
+    "user_id": 1,
+    "task_ids": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Portfolio Site",
+    "description": "Personal portfolio website",
+    "due_date": "2026-09-15",
+    "user_id": 2,
+    "task_ids": [
+      3
+    ]
+  }
+]
